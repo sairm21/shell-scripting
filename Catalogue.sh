@@ -21,7 +21,7 @@ cd /app
 npm install &>> /dev/null
 
 echo -e "\e[32m Setup SystemD Catalogue Service\e[0m"
-cp catalogue.service /etc/systemd/system/catalogue.service &>> /dev/null
+cp /home/centos/shell-scripting/catalogue.service /etc/systemd/system/catalogue.service &>> /dev/null
 
 echo -e "\e[32m Load and start the service\e[0m"
 systemctl daemon-reload &>> /dev/null
@@ -29,7 +29,7 @@ systemctl enable catalogue &>> /dev/null
 systemctl start catalogue &>> /dev/null
 
 echo -e "\e[32m Copying mongodb repo files\e[0m"
-cp mongodb.repo /etc/yum.repos.d/mongo.repo &>> /dev/null
+cp /home/centos/shell-scripting/mongodb.repo /etc/yum.repos.d/mongo.repo &>> /dev/null
 
 echo -e "\e[32m Installing mongodv\e[0m"
 yum install mongodb-org-shell -y &>> /dev/null
