@@ -11,7 +11,8 @@ echo -e "\e[32m Extracting Frontend content\e[0m"
 cd /usr/share/nginx/html
 unzip /tmp/frontend.zip &>> /dev/null
 
-# need to copy config file
+echo -e "\e[32m Extracting Frontend content\e[0m"
+cp roboshop.conf /etc/nginx/default.d/roboshop.conf
 
 echo -e "\e[32m restarting Nginx server\e[0m"
 systemctl enable nginx &>> /dev/null
