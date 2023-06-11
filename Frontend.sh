@@ -12,7 +12,7 @@ cd /usr/share/nginx/html
 unzip /tmp/frontend.zip &>> /dev/null
 
 echo -e "\e[32m Extracting Frontend content\e[0m"
-cp roboshop.conf /etc/nginx/default.d/roboshop.conf
+cp /home/centos/shell-scripting/roboshop.conf /etc/nginx/default.d/roboshop.conf
 
 echo -e "\e[32m restarting Nginx server\e[0m"
 systemctl enable nginx &>> /dev/null
