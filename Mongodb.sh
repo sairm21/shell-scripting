@@ -10,3 +10,4 @@ sed -i 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
 echo -e "\e[32m start and stop mongo db service\e[0m"
 systemctl enable mongod &>> /dev/null
 systemctl restart mongod &>> /dev/null
+ongod &>> /dev/null
