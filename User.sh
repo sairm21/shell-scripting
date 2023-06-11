@@ -36,5 +36,5 @@ echo -e "\e[32m Installing mongodv\e[0m"
 yum install mongodb-org-shell -y &>> /tmp/roboshop.log
 
 echo -e "\e[32m Load Schema\e[0m"
-mongo --host mongodb-dev.iamadevopsengineer.tech </app/schema/catalogue.js &>> /tmp/roboshop.log
+mongo --host mongodb-dev.iamadevopsengineer.tech </app/schema/user.js &>> /tmp/roboshop.log
 
