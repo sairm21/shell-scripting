@@ -11,16 +11,16 @@ echo -e "${colour} Adding application User${nocolour}"
 useradd roboshop &>> ${log_file}
 
 echo -e "${colour} setup an app directory${nocolour}"
-rm -rf ${${app_dir}} &>> ${log_file}
-mkdir ${${app_dir}}
+rm -rf ${app_dir} &>> ${log_file}
+mkdir ${app_dir}
 
 echo -e "${colour} Download the application code to created app directory${nocolour}"
 curl -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>> ${log_file}
-cd ${${app_dir}}
+cd ${app_dir}
 unzip /tmp/${component}.zip &>> ${log_file}
 
 echo -e "${colour} download the dependencies${nocolour}"
-cd ${${app_dir}}
+cd ${app_dir}
 npm install &>> ${log_file}
 
 echo -e "${colour} Setup SystemD Catalogue Service${nocolour}"
