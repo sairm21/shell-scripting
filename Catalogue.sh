@@ -1,8 +1,5 @@
+source common.sh
 component=catalogue
-colour="\e[34m"
-nocolour="\e[0m"
-log_file="/dev/null"
-app_dir="/app"
 
 echo -e "${colour} Setup NodeJS repos${nocolour}"
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>> ${log_file}
