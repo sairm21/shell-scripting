@@ -1,5 +1,4 @@
 source common.sh
-component=payment
+component="payment"
 
 python
-
