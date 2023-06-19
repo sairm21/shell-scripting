@@ -83,12 +83,12 @@ maven() {
 }
 
 python() {
-  echo -e "{colour} Install Python 3.6 {nocolour}"
+  echo -e "${colour} Install Python 3.6 ${nocolour}"
   yum install python36 gcc python3-devel -y &>> /tmp/roboshop.log
 
   app_user
 
-  echo -e "{colour} download the dependencies. {nocolour}"
+  echo -e "${colour} download the dependencies. ${nocolour}"
   cd /app &>> /tmp/roboshop.log
   pip3.6 install -r requirements.txt &>> /tmp/roboshop.log
 
