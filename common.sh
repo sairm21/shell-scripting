@@ -5,8 +5,10 @@ app_dir="/app"
 
 app_user() {
   echo -e "${colour} Adding application User${nocolour}"
-  useradd roboshop &>> ${log_file}
-
+  id roboshop &>> ${log_file}
+  if [ $? -eq 1 ]; then
+    useradd roboshop &>> ${log_file}
+  fi
   if [ $? -eq 0 ]; then
     echo -e "\e[32m Sucess\e[0m"
   else
@@ -51,9 +53,9 @@ systemd_setup() {
     systemctl start $component &>> ${log_file}
 
       if [ $? -eq 0 ]; then
-        echo -e "\e[31m Sucess\e[0m"
+        echo -e "\e[32m Sucess\e[0m"
       else
-        echo -e "\e[32m Failure\e[0m"
+        echo -e "\e[31m Failure\e[0m"
       fi
 }
 
@@ -90,9 +92,9 @@ nodejs() {
 systemd_setup
 
   if [ $? -eq 0 ]; then
-    echo -e "\e[31m Sucess\e[0m"
+    echo -e "\e[32m Sucess\e[0m"
   else
-    echo -e "\e[32m Failure\e[0m"
+    echo -e "\e[31m Failure\e[0m"
   fi
 }
 
@@ -119,9 +121,9 @@ mongo_schema_setup() {
   mongo --host mongodb-dev.iamadevopsengineer.tech <${app_dir}/schema/${component}.js &>> ${log_file}
 
   if [ $? -eq 0 ]; then
-    echo -e "\e[31m Sucess\e[0m"
+    echo -e "\e[32m Sucess\e[0m"
   else
-    echo -e "\e[32m Failure\e[0m"
+    echo -e "\e[31m Failure\e[0m"
   fi
 }
 
@@ -139,9 +141,9 @@ mysql_schema_setup() {
     mysql -h mysql-dev.iamadevopsengineer.tech -uroot -pRoboShop@1 < /app/schema/${component}.sql &>> ${log_file}
 
   if [ $? -eq 0 ]; then
-    echo -e "\e[31m Sucess\e[0m"
+    echo -e "\e[32m Sucess\e[0m"
   else
-    echo -e "\e[32m Failure\e[0m"
+    echo -e "\e[31m Failure\e[0m"
   fi
 }
 
@@ -173,9 +175,9 @@ maven() {
   mysql_schema_setup
 
   if [ $? -eq 0 ]; then
-    echo -e "\e[31m Sucess\e[0m"
+    echo -e "\e[32m Sucess\e[0m"
   else
-    echo -e "\e[32m Failure\e[0m"
+    echo -e "\e[31m Failure\e[0m"
   fi
 }
 
@@ -204,8 +206,8 @@ python() {
   systemd_setup
 
   if [ $? -eq 0 ]; then
-    echo -e "\e[31m Sucess\e[0m"
+    echo -e "\e[32m Sucess\e[0m"
   else
-    echo -e "\e[32m Failure\e[0m"
+    echo -e "\e[31m Failure\e[0m"
   fi
 }
