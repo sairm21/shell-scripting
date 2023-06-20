@@ -122,6 +122,8 @@ stat_check $?
   cd /app &>> /tmp/roboshop.log
   pip3.6 install -r requirements.txt &>> ${log_file}
 
+sed -i "s/roboshop_app_password/$1/" /home/centos/shell-scripting/${component}.service &>> ${log_file}
+
 stat_check $?
   systemd_setup
 
