@@ -14,13 +14,13 @@ app_user() {
   echo -e "${colour} Download the application code to created app directory${nocolour}"
   curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>> ${log_file}
   cd ${app_dir}
-  unzip "/tmp/${component.zip}" &>> ${log_file}
+  unzip "/tmp/${component}.zip" &>> ${log_file}
 
 }
 
 systemd_setup() {
     echo -e "${colour} Setup SystemD $component Service${nocolour}"
-    cp /home/centos/shell-scripting/$component.service /etc/systemd/system/$component.service &>> ${log_file}
+    cp /home/centos/shell-scripting/${component}.service /etc/systemd/system/${component}.service &>> ${log_file}
 
     echo -e "${colour} Load and start the service${nocolour}"
     systemctl daemon-reload &>> ${log_file}
@@ -53,7 +53,7 @@ mongo_schema_setup() {
   yum install mongodb-org-shell -y &>> ${log_file}
 
   echo -e "${colour} Load Schema${nocolour}"
-  mongo --host mongodb-dev.iamadevopsengineer.tech <${app_dir}/schema/$component.js &>> ${log_file}
+  mongo --host mongodb-dev.iamadevopsengineer.tech <${app_dir}/schema/${component}.js &>> ${log_file}
 
 }
 
@@ -84,13 +84,13 @@ maven() {
 
 python() {
   echo -e "${colour} Install Python 3.6 ${nocolour}"
-  yum install python36 gcc python3-devel -y &>> /tmp/roboshop.log
+  yum install python36 gcc python3-devel -y &>> ${log_file}
 
   app_user
 
   echo -e "${colour} download the dependencies. ${nocolour}"
   cd /app &>> /tmp/roboshop.log
-  pip3.6 install -r requirements.txt &>> /tmp/roboshop.log
+  pip3.6 install -r requirements.txt &>> ${log_file}
 
   systemd_setup
 
