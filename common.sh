@@ -29,7 +29,8 @@ stat_check $?
   cd ${app_dir}
   unzip "/tmp/${component}.zip" &>> ${log_file}
 
-stat_check $?}
+stat_check $?
+}
 
 systemd_setup() {
     echo -e "${colour} Setup SystemD $component Service${nocolour}"
@@ -41,11 +42,7 @@ stat_check $?
     systemctl enable $component &>> ${log_file}
     systemctl start $component &>> ${log_file}
 
-      if [ $? -eq 0 ]; then
-        echo -e "\e[32m Sucess\e[0m"
-      else
-        echo -e "\e[31m Failure\e[0m"
-      fi
+stat_check $?
 }
 
 nodejs() {
@@ -65,7 +62,8 @@ stat_check $?
 stat_check $?
 systemd_setup
 
-stat_check $?}
+stat_check $?
+}
 
 mongo_schema_setup() {
   echo -e "${colour} Copying mongodb repo files${nocolour}"
@@ -79,7 +77,8 @@ stat_check $?
   echo -e "${colour} Load Schema${nocolour}"
   mongo --host mongodb-dev.iamadevopsengineer.tech <${app_dir}/schema/${component}.js &>> ${log_file}
 
-stat_check $?}
+stat_check $?
+}
 
 mysql_schema_setup() {
     echo -e "${colour} mysql installation${nocolour}"
@@ -89,7 +88,8 @@ stat_check $?
     echo -e "${colour} Load Schema${nocolour}"
     mysql -h mysql-dev.iamadevopsengineer.tech -uroot -pRoboShop@1 < /app/schema/${component}.sql &>> ${log_file}
 
-stat_check $?}
+stat_check $?
+}
 
 maven() {
   echo -e "${colour} install maven ${nocolour}"
@@ -108,7 +108,8 @@ stat_check $?
 
   mysql_schema_setup
 
-stat_check $?}
+stat_check $?
+}
 
 python() {
   echo -e "${colour} Install Python 3.6 ${nocolour}"
@@ -124,4 +125,5 @@ stat_check $?
 stat_check $?
   systemd_setup
 
-stat_check $?}
+stat_check $?
+}
