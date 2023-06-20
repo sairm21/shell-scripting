@@ -16,6 +16,11 @@ app_user() {
   cd ${app_dir}
   unzip "/tmp/${component}.zip" &>> ${log_file}
 
+  if [ $? -eq 0 ]; then
+    echo -e "\e[31m Sucess\e[0m"
+  else
+    echo -e "\e[32m Failure\e[0m"
+  fi
 }
 
 systemd_setup() {
@@ -26,6 +31,12 @@ systemd_setup() {
     systemctl daemon-reload &>> ${log_file}
     systemctl enable $component &>> ${log_file}
     systemctl start $component &>> ${log_file}
+
+      if [ $? -eq 0 ]; then
+        echo -e "\e[31m Sucess\e[0m"
+      else
+        echo -e "\e[32m Failure\e[0m"
+      fi
 }
 
 nodejs() {
@@ -43,6 +54,11 @@ nodejs() {
 
 systemd_setup
 
+  if [ $? -eq 0 ]; then
+    echo -e "\e[31m Sucess\e[0m"
+  else
+    echo -e "\e[32m Failure\e[0m"
+  fi
 }
 
 mongo_schema_setup() {
@@ -55,6 +71,11 @@ mongo_schema_setup() {
   echo -e "${colour} Load Schema${nocolour}"
   mongo --host mongodb-dev.iamadevopsengineer.tech <${app_dir}/schema/${component}.js &>> ${log_file}
 
+  if [ $? -eq 0 ]; then
+    echo -e "\e[31m Sucess\e[0m"
+  else
+    echo -e "\e[32m Failure\e[0m"
+  fi
 }
 
 mysql_schema_setup() {
@@ -64,6 +85,11 @@ mysql_schema_setup() {
     echo -e "${colour} Load Schema${nocolour}"
     mysql -h mysql-dev.iamadevopsengineer.tech -uroot -pRoboShop@1 < /app/schema/${component}.sql &>> ${log_file}
 
+  if [ $? -eq 0 ]; then
+    echo -e "\e[31m Sucess\e[0m"
+  else
+    echo -e "\e[32m Failure\e[0m"
+  fi
 }
 
 maven() {
@@ -80,6 +106,12 @@ maven() {
   systemd_setup
 
   mysql_schema_setup
+
+  if [ $? -eq 0 ]; then
+    echo -e "\e[31m Sucess\e[0m"
+  else
+    echo -e "\e[32m Failure\e[0m"
+  fi
 }
 
 python() {
@@ -94,4 +126,9 @@ python() {
 
   systemd_setup
 
+  if [ $? -eq 0 ]; then
+    echo -e "\e[31m Sucess\e[0m"
+  else
+    echo -e "\e[32m Failure\e[0m"
+  fi
 }
