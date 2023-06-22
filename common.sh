@@ -2,12 +2,19 @@ colour="\e[34m"
 nocolour="\e[0m"
 log_file="/dev/null"
 app_dir="/app"
+user_id=$(id -u)
+
+if [ $user_id -ne 0 ]; then
+  echo -e "\e[31m Require root previlages to run this script\e[0m"
+  exit 1
+fi
 
 stat_check() {
   if [ $1 -eq 0 ]; then
     echo -e "\e[32m Sucess\e[0m"
   else
     echo -e "\e[31m Failure\e[0m"
+    exit 1
   fi
 }
 
@@ -22,38 +29,35 @@ app_user() {
   echo -e "${colour} setup an app directory${nocolour}"
   rm -rf /app &>> ${log_file}
   mkdir /app &>> ${log_file}
+  stat_check $?
 
-stat_check $?
   echo -e "${colour} Download the application code to created app directory${nocolour}"
   curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>> ${log_file}
   cd ${app_dir}
   unzip "/tmp/${component}.zip" &>> ${log_file}
-
-stat_check $?
+  stat_check $?
 }
 
 systemd_setup() {
     echo -e "${colour} Setup SystemD $component Service${nocolour}"
     cp /home/centos/shell-scripting/${component}.service /etc/systemd/system/${component}.service &>> ${log_file}
     sed -i "s/roboshop_app_password/$roboshop_app_password/" /etc/systemd/system/${component}.service &>> ${log_file}
+    stat_check $?
 
-stat_check $?
     echo -e "${colour} Load and start the service${nocolour}"
     systemctl daemon-reload &>> ${log_file}
     systemctl enable $component &>> ${log_file}
     systemctl start $component &>> ${log_file}
-
-stat_check $?
+    stat_check $?
 }
 
 nodejs() {
   echo -e "${colour} Setup NodeJS repos${nocolour}"
   curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>> ${log_file}
-
-stat_check $?
+  stat_check $?
   echo -e "${colour} Install NodeJS${nocolour}"
   yum install nodejs -y &>> ${log_file}
-stat_check $?
+  stat_check $?
   app_user
 
   echo -e "${colour} download the dependencies${nocolour}"

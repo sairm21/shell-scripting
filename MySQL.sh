@@ -1,16 +1,22 @@
-echo -e "\e[32m disable MySQL 8 version.\e[0m"
-yum module disable mysql -y &>> /tmp/roboshop.log
+source common.sh
 
-echo -e "\e[32m Setup the MySQL5.7 repo file.\e[0m"
-cp /home/centos/shell-scripting/mysql.repo /etc/yum.repos.d/mysql.repo &>> /tmp/roboshop.log
+echo -e "${colour} disable MySQL 8 version.${nocolour}"
+yum module disable mysql -y &>> ${log_file}
+stat_check $?
 
-echo -e "\e[32m Install MySQL Server.\e[0m"
-yum install mysql-community-server -y &>> /tmp/roboshop.log
+echo -e "${colour} Setup the MySQL5.7 repo file.${nocolour}"
+cp /home/centos/shell-scripting/mysql.repo /etc/yum.repos.d/mysql.repo &>> ${log_file}
+stat_check $?
 
-echo -e "\e[32m Start  and enable MySQL Service.\e[0m"
-systemctl enable mysqld &>> /tmp/roboshop.log
-systemctl restart mysqld &>> /tmp/roboshop.log
+echo -e "${colour} Install MySQL Server.${nocolour}"
+yum install mysql-community-server -y &>> ${log_file}
+stat_check $?
 
-echo -e "\e[32m changing root credentials.\e[0m"
-mysql_secure_installation --set-root-pass $1 &>> /tmp/roboshop.log
+echo -e "${colour} Start  and enable MySQL Service.${nocolour}"
+systemctl enable mysqld &>> ${log_file}
+systemctl restart mysqld &>> ${log_file}
+stat_check $?
 
+echo -e "${colour} changing root credentials.${nocolour}"
+mysql_secure_installation --set-root-pass $1 &>> ${log_file}
+stat_check $?
