@@ -1,4 +1,4 @@
-colour="\e[34m"
+colour="\e[33m"
 nocolour="\e[0m"
 log_file="/dev/null"
 app_dir="/app"
