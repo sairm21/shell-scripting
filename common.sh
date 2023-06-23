@@ -1,6 +1,6 @@
 colour="\e[33m"
 nocolour="\e[0m"
-log_file="/dev/null"
+log_file="/tmp/roboshop.log"
 app_dir="/app"
 user_id=$(id -u)
 
