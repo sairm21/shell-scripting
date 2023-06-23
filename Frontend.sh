@@ -17,7 +17,7 @@ cd /usr/share/nginx/html
 unzip /tmp/frontend.zip &>> ${log_file}
 stat_check $?
 
-echo -e "${colour} Extracting Frontend content${nocolour}"
+echo -e "${colour} configuring Nginx conf file${nocolour}"
 cp /home/centos/shell-scripting/roboshop.conf /etc/nginx/default.d/roboshop.conf
 stat_check $?
 
