@@ -91,7 +91,7 @@ mysql_schema_setup() {
 
 stat_check $?
     echo -e "${colour} Load Schema${nocolour}"
-    mysql -h mysql-dev.iamadevopsengineer.tech -uroot -pRoboShop@1 < /app/schema/${component}.sql &>> ${log_file}
+    mysql -h mysql-dev.iamadevopsengineer.tech -uroot -p${mysql_root_password} < /app/schema/${component}.sql &>> ${log_file}
 
 stat_check $?
 }
