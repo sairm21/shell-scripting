@@ -32,8 +32,8 @@ app_user() {
   stat_check $?
 
   echo -e "${colour} Download the application code to created app directory${nocolour}"
-  curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>> ${log_file}
-  cd ${app_dir}
+  curl -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>> ${log_file}
+  cd /${app_dir}
   unzip "/tmp/${component}.zip" &>> ${log_file}
   stat_check $?
 }
